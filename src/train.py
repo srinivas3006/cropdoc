@@ -7,7 +7,7 @@ from dataset import get_datasets
 from model import build_model
 
 def main():
-    parser = argparse.ArgumentParser(description="Train the PlantVillage CNN model")
+    parser = argparse.ArgumentParser(description="Train the Universal CropDoc CNN model")
     parser.add_argument('--color_mode', type=str, default='rgb', choices=['rgb', 'grayscale'], help='Color mode for training')
     parser.add_argument('--epochs', type=int, default=105, help='Number of epochs to train')
     parser.add_argument('--batch_size', type=int, default=32, help='Batch size')
@@ -38,7 +38,7 @@ def main():
     # Modern optimization: Callbacks
     os.makedirs('saved_models', exist_ok=True)
     os.makedirs('logs', exist_ok=True)
-    model_path = os.path.join('saved_models', f'best_tomato_model_{args.color_mode}.keras')
+    model_path = os.path.join('saved_models', f'best_model_{args.color_mode}.keras')
     class_names_path = os.path.join('saved_models', 'class_names.json')
 
     # Save the class dictionary so predict.py can load it dynamically

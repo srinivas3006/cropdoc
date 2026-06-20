@@ -16,5 +16,5 @@ Step 4: View the training progress graphs (Open http://localhost:6006 in your br
 tensorboard --logdir logs/
 
 Step 5: Test the trained model on a single unseen image to get a prediction
-python src/predict.py --image_path "path/to/test.jpg" --model_path "saved_models/best_tomato_model_rgb.keras"
+python src/predict.py --image_path "path/to/test.jpg" --model_path "saved_models/best_model_rgb.keras"
 (What this does: It secretly reads the `class_names.json` dictionary generated during Step 3, looks at your test image, and prints the exact folder name it thinks the image belongs to!)

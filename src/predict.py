@@ -6,7 +6,7 @@ from tensorflow.keras.models import load_model  # type: ignore
 from tensorflow.keras.preprocessing import image  # type: ignore
 
 def main():
-    parser = argparse.ArgumentParser(description="Predict Tomato Leaf Disease from an image")
+    parser = argparse.ArgumentParser(description="Predict Disease from an image")
     parser.add_argument('--image_path', type=str, required=True, help='Path to the image file')
     parser.add_argument('--model_path', type=str, required=True, help='Path to the saved model (.keras or .h5)')
     parser.add_argument('--color_mode', type=str, default='rgb', choices=['rgb', 'grayscale'], help='Color mode used during training')

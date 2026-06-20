@@ -42,7 +42,7 @@ python src/train.py --epochs 100 --color_mode rgb
 Once training says `Training complete.`, you can test a single image:
 
 ```bash
-python src/predict.py --image_path "path/to/test.jpg" --model_path "saved_models/best_tomato_model_rgb.keras"
+python src/predict.py --image_path "path/to/test.jpg" --model_path "saved_models/best_model_rgb.keras"
 ```
 
 **What happens:** 
