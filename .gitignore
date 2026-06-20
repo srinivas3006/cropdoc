@@ -1,0 +1,8 @@
+dataset_original/
+dataset_splits/
+__pycache__/
+*.pyc
+logs/
+saved_models/
+.venv/
+env/
