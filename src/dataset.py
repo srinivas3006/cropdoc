@@ -2,13 +2,13 @@ import os
 import tensorflow as tf
 from tensorflow.keras.utils import image_dataset_from_directory  # type: ignore
 
-def get_datasets(data_dir, batch_size=32, img_size=(150, 150), color_mode="rgb"):
+def get_datasets(data_dir, batch_size=32, img_size=(224, 224), color_mode="rgb"):
     """
-    Creates tf.data.Dataset objects for training, validation, and testing.
-    Automatically splits the data inside the `train` folder (80% train, 20% validation)
-    so the user doesn't have to manually create a validation folder.
+    Creates tf.data.Dataset objects for training and validation.
+    Reads from the `train` and `validation` folders in `data_dir`.
     """
     train_dir = os.path.join(data_dir, "train")
+    val_dir = os.path.join(data_dir, "validation")
 
     # Map rgb/grayscale to the expected arguments for image_dataset_from_directory
     color_mode_arg = "grayscale" if color_mode == "grayscale" else "rgb"
@@ -16,11 +16,9 @@ def get_datasets(data_dir, batch_size=32, img_size=(150, 150), color_mode="rgb")
     # Preprocessing layer to normalize pixel values from [0, 255] to [0, 1]
     normalization_layer = tf.keras.layers.Rescaling(1./255)
 
-    # 80% for training
+    # Load training dataset
     train_ds = image_dataset_from_directory(
         train_dir,
-        validation_split=0.2,
-        subset="training",
         seed=123,
         label_mode='categorical',
         color_mode=color_mode_arg,
@@ -29,11 +27,9 @@ def get_datasets(data_dir, batch_size=32, img_size=(150, 150), color_mode="rgb")
         shuffle=True,
     )
 
-    # 20% for validation
+    # Load validation dataset
     val_ds = image_dataset_from_directory(
-        train_dir,
-        validation_split=0.2,
-        subset="validation",
+        val_dir,
         seed=123,
         label_mode='categorical',
         color_mode=color_mode_arg,

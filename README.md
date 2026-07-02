@@ -1,21 +1,19 @@
-# Universal CropDoc Image Classifier
+# Deep Learning-Based Method for Irrigation Status Detection in Tomato Using Plant Leaves
 
-This project uses a Convolutional Neural Network (CNN) to automatically detect diseases in ANY plant, vegetable, or object using photos. It is built with modern Python and TensorFlow 2.x and is **100% dynamically scalable**.
+This project uses a Convolutional Neural Network (CNN) to automatically detect the irrigation status of tomato plants using photos of their leaves. It is built with modern Python and TensorFlow 2.x to help optimize water usage and agricultural yield.
 
-## 🌟 The Universal Capabilities
-This codebase does not have any hardcoded limits. The Artificial Intelligence dynamically builds itself based on the folders you give it. 
-* If you give it 2 folders of Apple images, it becomes an Apple classifier.
-* If you give it 50 folders of mixed vegetables, it becomes a multi-vegetable super-classifier.
+## 🌟 Project Focus
+The system classifies tomato leaf images into different irrigation states (e.g., Well-Watered vs. Drought-Stressed). By analyzing leaf morphology and visual characteristics, the deep learning model can accurately determine if the plant requires watering.
 
 ---
 
 ## 🚀 Quick Start Guide (Step-by-Step)
 
 ### Step 1: Set Up Your Data Folders
-To make the model smart, you just have to give it pictures!
+To train the model, you need a dataset of tomato leaves sorted by their irrigation status.
 1. Go to `dataset_splits/train/` (and do the same for `dataset_splits/validation/`).
-2. Create a brand new folder for every disease or category you want it to learn.
-3. Name the folders clearly (e.g., `Potato_Healthy`, `Potato_Blight`, `Tomato_Rust`).
+2. Create a folder for each irrigation status category.
+3. Name the folders clearly (e.g., `Well_Watered`, `Water_Stressed`, `Drought`).
 4. Drag and drop your `.jpg` images into the matching folders.
 
 ### Step 2: Install Requirements
@@ -31,21 +29,21 @@ python src/train.py --epochs 100 --color_mode rgb
 ```
 
 **What happens:** 
-1. **Dynamic Counting:** The script looks at your `dataset_splits/train/` folder and counts exactly how many folders you made.
-2. **Brain Building:** It scales the Neural Network up or down to perfectly match your number of folders.
+1. **Dynamic Counting:** The script looks at your `dataset_splits/train/` folder and counts exactly how many classes you made.
+2. **Brain Building:** It configures the Neural Network to classify those specific irrigation statuses.
 3. **Saving the Dictionary:** It saves a `class_names.json` file inside `saved_models/` so the system permanently remembers the exact names of your folders.
 4. **Training:** It feeds all the images into the network and saves the best model to the `saved_models/` folder.
 
 *(To view live training progress graphs, run `tensorboard --logdir logs/` in a separate terminal and open `http://localhost:6006` in your browser).*
 
 ### Step 4: Test an Unseen Image (Prediction)
-Once training says `Training complete.`, you can test a single image:
+Once training says `Training complete.`, you can test a single leaf image:
 
 ```bash
-python src/predict.py --image_path "path/to/test.jpg" --model_path "saved_models/best_model_rgb.keras"
+python src/predict.py --image_path "path/to/test_leaf.jpg" --model_path "saved_models/best_model_rgb.keras"
 ```
 
 **What happens:** 
 1. The script loads your trained `.keras` model.
 2. It automatically reads the `class_names.json` dictionary that was generated during Step 3.
-3. It analyzes your image and prints out the exact folder name it belongs to with a confidence percentage!
+3. It analyzes your tomato leaf image and prints out the predicted irrigation status with a confidence percentage!

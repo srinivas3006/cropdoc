@@ -6,7 +6,7 @@ from tensorflow.keras.models import load_model  # type: ignore
 from tensorflow.keras.preprocessing import image  # type: ignore
 
 def main():
-    parser = argparse.ArgumentParser(description="Predict Disease from an image")
+    parser = argparse.ArgumentParser(description="Predict Irrigation Status from a tomato leaf image")
     parser.add_argument('--image_path', type=str, required=True, help='Path to the image file')
     parser.add_argument('--model_path', type=str, required=True, help='Path to the saved model (.keras or .h5)')
     parser.add_argument('--color_mode', type=str, default='rgb', choices=['rgb', 'grayscale'], help='Color mode used during training')
@@ -33,7 +33,7 @@ def main():
 
     print(f"Processing image {args.image_path}...")
     color_mode = "grayscale" if args.color_mode == "grayscale" else "rgb"
-    img = image.load_img(args.image_path, target_size=(150, 150), color_mode=color_mode)
+    img = image.load_img(args.image_path, target_size=(224, 224), color_mode=color_mode)
     
     img_tensor = image.img_to_array(img)
     img_tensor = np.expand_dims(img_tensor, axis=0)
